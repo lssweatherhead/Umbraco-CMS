@@ -18,7 +18,43 @@
                 ng-if="vm.loadingDataType">
             </umb-load-indicator>
 
-            <umb-box ng-if="!vm.loadingDataType">
+            
+
+            <umb-box ng-if="!vm.loadingDataType && model.existing && model.existing.length > 0">
+                <umb-box-header title="Existing data types"></umb-box-header>
+                <umb-box-content>
+                    <ul class="umb-card-grid -five-in-row" ng-mouseleave="vm.hideDetailsOverlay()">
+                        <li ng-repeat="dataType in model.existing | orderBy:'name'"
+                            data-element="editor-{{dataType.name}}"
+                            ng-mouseover="vm.showDetailsOverlay(dataType)"
+                            ng-click="vm.pickDataType(dataType)">
+                            <div ng-if="dataType.loading" class="umb-card-grid-item__loading">
+                                <div class="umb-button__progress"></div>
+                            </div>
+                            <a class="umb-card-grid-item" href="" title="{{ dataType.name }}">
+                                <span>
+                                    <i class="{{ dataType.icon }}" ng-class="{'icon-autofill': dataType.icon == null}"></i>
+                                    {{ dataType.name }}
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                        
+                </umb-box-content>
+            </umb-box>
+
+            <a href=""
+                ng-if="!vm.configureNewEditor"
+                data-element="property-add"
+                class="umb-group-builder__group-add-property"
+                ng-click="vm.enableNewEditorConfig()"
+                ng-focus="activateGroup(tab)"
+                focus-when="{{property.focus}}" style="margin: 0">
+                Configure new editor
+            </a>
+
+            <umb-box ng-if="!vm.loadingDataType && vm.configureNewEditor">
+                <umb-box-header title="New editor"></umb-box-header>
                 <umb-box-content>
 
                     <div class="umb-control-group" ng-if="vm.dataType.id !== 0">

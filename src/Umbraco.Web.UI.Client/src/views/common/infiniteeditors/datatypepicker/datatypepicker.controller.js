@@ -80,6 +80,7 @@
 
             dataTypeResource.getGroupedPropertyEditors().then(function(data) {
                 vm.tabs[0].typesAndEditors = data;
+                console.log("[PROPERTY EDITORS]", data);
                 vm.typesAndEditors = data;
                 vm.tabsLoaded = vm.tabsLoaded + 1;
                 checkIfTabContentIsLoaded();
@@ -93,6 +94,7 @@
 
             dataTypeResource.getGroupedDataTypes().then(function(data) {
                 vm.tabs[1].userConfigured = data;
+                console.log("[DATA TYPES]", data);
                 vm.userConfigured = data;
                 vm.tabsLoaded = vm.tabsLoaded + 1;
                 checkIfTabContentIsLoaded();
@@ -164,6 +166,9 @@
                 property: $scope.model.property,
                 contentTypeName: $scope.model.contentTypeName,
                 create: true,
+                existing: vm.userConfigured.common.filter(function(val, idx, arr) {
+                    return val.alias === propertyEditor.alias
+                }),
                 view: "views/common/infiniteeditors/datatypesettings/datatypesettings.html",
                 submit: function(model) {
                     contentTypeResource.getPropertyTypeScaffold(model.dataType.id).then(function(propertyType) {

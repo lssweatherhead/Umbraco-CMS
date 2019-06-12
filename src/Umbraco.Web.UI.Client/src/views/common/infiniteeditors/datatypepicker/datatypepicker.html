@@ -33,11 +33,11 @@
                     <umb-load-indicator ng-if="vm.loading"></umb-load-indicator>
                     <!-- TABS -->
                     <div ng-if="vm.showTabs">
-                        <umb-tabs-nav
+                        <!-- <umb-tabs-nav
                             ng-if="vm.tabs"
                             tabs="vm.tabs"
                             on-tab-change="vm.onTabChange(tab)">
-                        </umb-tabs-nav>
+                        </umb-tabs-nav> -->
                         <umb-tab-content ng-repeat="tab in vm.tabs" tab="tab" ng-if="tab.active">
                             <div ng-if="tab.alias==='Default'">
                                 <div ng-repeat="(key,value) in tab.typesAndEditors">

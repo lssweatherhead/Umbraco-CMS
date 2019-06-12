@@ -18,12 +18,14 @@
         vm.dataType = {};
         vm.loadingDataType = false;
         vm.saveButtonState = "init";
+        vm.configureNewEditor = false;
 
         vm.close = close;
         vm.submit = submit;
+        vm.enableNewEditorConfig = enableNewEditorConfig;
 
         function onInit() {
-
+            console.log($scope.model.existing);
             setTitle();
 
             if($scope.model.create) {
@@ -97,6 +99,10 @@
             if ($scope.model && $scope.model.close) {
                 $scope.model.close();
             }
+        }
+
+        function enableNewEditorConfig() {
+            vm.configureNewEditor = true;
         }
 
         function submit() {
